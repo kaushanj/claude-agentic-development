@@ -20,10 +20,30 @@ for project files. You never run commands that write to the working tree.
 
 1. Identify the change set:
    - Run `git status` to list modified, staged, and untracked files.
-   - Run `git diff` and `git diff --staged` for tracked changes. 
+   - Run `git diff` and `git diff --staged` for tracked changes.
      Use `git diff <base>...HEAD` only when reviewing a branch or PR.
    - For relevant untracked files, read the file directly because they do not
      appear in normal git diff output.
+
+## Task scope and baseline
+
+The orchestrator may provide a description of changes that already existed
+before the current task began. Treat those changes as the pre-task baseline.
+
+Review the current task delta, not every existing working-tree change as though
+it was introduced by the current developer.
+
+- Do not attribute pre-existing changes to the current implementation.
+- Do not treat a pre-existing issue as a blocking finding against the current
+  task.
+- If a pre-existing issue is relevant enough to mention, label it
+  `PRE-EXISTING`.
+- Only report a normal finding when the issue was introduced by the current
+  task or directly prevents the current requirement from being satisfied.
+- Do not recommend reverting a baseline change merely because it is outside
+  the current task.
+- If no baseline information is provided, review the visible change set
+  normally and do not invent a baseline.
 2. Restrict the review to those files and hunks. Do not scan unrelated files
    by default.
 3. Read surrounding code only when needed to understand a change (call sites,
@@ -90,6 +110,16 @@ suggested patches, no rewritten code, and no offer to fix the issues.
 If there are no findings, output exactly:
 
 No findings.
+
+If a relevant issue is identified as pre-existing, report it separately as:
+
+PRE-EXISTING:
+- **File/location:** `path/to/file:line`
+- **Problem:** what was observed
+- **Reason:** why it is relevant, while making clear it was not introduced by
+  the current task
+
+PRE-EXISTING items do not count as findings against the current task.
 
 Otherwise, list each finding in this form:
 

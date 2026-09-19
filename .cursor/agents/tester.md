@@ -6,7 +6,7 @@ description: >
   Reads the codebase, inspects existing tests, adds or updates test files,
   and runs tests. Never modifies production code and never fixes production
   bugs. Leaves failing tests in place when they expose a bug.
-tools: Read, Write, Edit, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash
 model: inherit
 ---
 

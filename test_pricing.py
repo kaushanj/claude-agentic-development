@@ -16,6 +16,26 @@ class PricingTests(unittest.TestCase):
     def test_quantity_ten(self):
         self.assertEqual(calculate_total(10, 10, 10), 90.00)
 
+    def test_quantity_nine_hundred_ninety_nine(self):
+        self.assertEqual(calculate_total(10, 999, 10), 8991.00)
+
+    def test_quantity_one_thousand(self):
+        self.assertEqual(calculate_total(10, 1000, 10), 9000.00)
+
+    def test_quantity_one_thousand_zero_discount(self):
+        self.assertEqual(calculate_total(10, 1000, 0), 10000.00)
+
+    def test_quantity_one_thousand_full_discount(self):
+        self.assertEqual(calculate_total(10, 1000, 100), 0.00)
+
+    def test_quantity_above_one_thousand_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 1001, 10)
+
+    def test_quantity_far_above_one_thousand_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 10000, 10)
+
     def test_zero_quantity_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(10, 0, 10)
@@ -49,8 +69,25 @@ class PricingTests(unittest.TestCase):
             calculate_total(10, None, 10)
 
     def test_negative_unit_price_raises(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError) as ctx:
             calculate_total(-1, 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
+    def test_boolean_true_unit_price_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(True, 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
+    def test_boolean_false_unit_price_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(False, 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
+    def test_zero_unit_price(self):
+        self.assertEqual(calculate_total(0, 2, 10), 0.00)
+
+    def test_integer_one_unit_price(self):
+        self.assertEqual(calculate_total(1, 2, 10), 1.80)
 
     def test_negative_discount_raises(self):
         with self.assertRaises(ValueError):
@@ -89,7 +126,12 @@ class PricingTests(unittest.TestCase):
             calculate_total(10, 2, float("-inf"))
 
     def test_fractional_discount(self):
-        self.assertEqual(calculate_total(10, 2, 10.5), 17.90)
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, 10.5)
+
+    def test_integer_valued_float_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, 10.0)
 
     def test_zero_discount(self):
         self.assertEqual(calculate_total(10, 2, 0), 20.00)
