@@ -7,6 +7,7 @@ description: >
   a small concrete plan for another developer. Never modifies project files
   and never implements the requested work.
 tools: Read, Grep, Glob, Bash
+permissionMode: plan
 model: inherit
 ---
 
