@@ -10,6 +10,14 @@ class PricingTests(unittest.TestCase):
             18.00,
         )
 
+    def test_zero_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 0, 10)
+
+    def test_fractional_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 1.5, 10)
+
     def test_negative_unit_price_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(-1, 2, 10)
