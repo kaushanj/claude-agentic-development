@@ -10,6 +10,10 @@ class PricingTests(unittest.TestCase):
             18.00,
         )
 
+    def test_negative_unit_price_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(-1, 2, 10)
+
 
 if __name__ == "__main__":
     unittest.main()
