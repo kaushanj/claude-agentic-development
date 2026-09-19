@@ -60,6 +60,37 @@ class PricingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             calculate_total(10, 2, 101)
 
+    def test_boolean_true_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, True)
+
+    def test_boolean_false_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, False)
+
+    def test_string_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, "10")
+
+    def test_none_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, None)
+
+    def test_nan_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, float("nan"))
+
+    def test_positive_infinity_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, float("inf"))
+
+    def test_negative_infinity_discount_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 2, float("-inf"))
+
+    def test_fractional_discount(self):
+        self.assertEqual(calculate_total(10, 2, 10.5), 17.90)
+
     def test_zero_discount(self):
         self.assertEqual(calculate_total(10, 2, 0), 20.00)
 
