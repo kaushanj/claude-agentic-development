@@ -1,5 +1,5 @@
 def calculate_total(unit_price, quantity, discount_percent=0):
-    if not isinstance(quantity, int) or quantity <= 0:
+    if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
         raise ValueError("quantity must be positive")
     if unit_price < 0:
         raise ValueError("unit_price must be positive")

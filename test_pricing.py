@@ -10,13 +10,43 @@ class PricingTests(unittest.TestCase):
             18.00,
         )
 
+    def test_minimum_quantity_one(self):
+        self.assertEqual(calculate_total(10, 1, 10), 9.00)
+
+    def test_quantity_ten(self):
+        self.assertEqual(calculate_total(10, 10, 10), 90.00)
+
     def test_zero_quantity_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(10, 0, 10)
 
+    def test_negative_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, -1, 10)
+
     def test_fractional_quantity_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(10, 1.5, 10)
+
+    def test_boolean_true_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, True, 10)
+
+    def test_boolean_false_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, False, 10)
+
+    def test_integer_valued_float_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, 1.0, 10)
+
+    def test_string_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, "1", 10)
+
+    def test_none_quantity_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(10, None, 10)
 
     def test_negative_unit_price_raises(self):
         with self.assertRaises(ValueError):
