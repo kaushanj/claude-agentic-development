@@ -16,29 +16,69 @@ class PricingTests(unittest.TestCase):
     def test_quantity_ten(self):
         self.assertEqual(calculate_total(10, 10, 10), 90.00)
 
+    def test_quantity_fifty(self):
+        self.assertEqual(calculate_total(10, 50, 10), 450.00)
+
+    def test_quantity_forty_nine(self):
+        self.assertEqual(calculate_total(10, 49, 10), 441.00)
+
+    def test_quantity_fifty_one(self):
+        self.assertEqual(calculate_total(10, 51, 10), 459.00)
+
+    def test_quantity_fifty_two(self):
+        self.assertEqual(calculate_total(10, 52, 10), 468.00)
+
+    def test_quantity_seventy_four(self):
+        self.assertEqual(calculate_total(10, 74, 10), 666.00)
+
+    def test_quantity_seventy_five(self):
+        self.assertEqual(calculate_total(10, 75, 10), 675.00)
+
+    def test_quantity_seventy_six_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(10, 76, 10)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
+
+    def test_quantity_fifty_zero_discount(self):
+        self.assertEqual(calculate_total(10, 50, 0), 500.00)
+
+    def test_quantity_fifty_full_discount(self):
+        self.assertEqual(calculate_total(10, 50, 100), 0.00)
+
     def test_quantity_nine_hundred_ninety_nine(self):
-        self.assertEqual(calculate_total(10, 999, 10), 8991.00)
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(10, 999, 10)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_quantity_one_thousand(self):
-        self.assertEqual(calculate_total(10, 1000, 10), 9000.00)
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(10, 1000, 10)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_quantity_one_thousand_zero_discount(self):
-        self.assertEqual(calculate_total(10, 1000, 0), 10000.00)
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(10, 1000, 0)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_quantity_one_thousand_full_discount(self):
-        self.assertEqual(calculate_total(10, 1000, 100), 0.00)
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(10, 1000, 100)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_quantity_above_one_thousand_raises(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError) as ctx:
             calculate_total(10, 1001, 10)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_quantity_far_above_one_thousand_raises(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError) as ctx:
             calculate_total(10, 10000, 10)
+        self.assertEqual(str(ctx.exception), "quantity must not exceed 75")
 
     def test_zero_quantity_raises(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError) as ctx:
             calculate_total(10, 0, 10)
+        self.assertEqual(str(ctx.exception), "quantity must be positive")
 
     def test_negative_quantity_raises(self):
         with self.assertRaises(ValueError):
