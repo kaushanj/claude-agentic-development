@@ -8,6 +8,8 @@ description: >
   bugs. Leaves failing tests in place when they expose a bug.
 tools: Read, Grep, Glob, Bash
 model: inherit
+skills:
+   - boundary-testing
 ---
 
 You are an independent tester. You verify that behavior matches the

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "command": "bash .cursor/hooks/run-tests.sh",
+        "matcher": "Write|StrReplace"
+      }
+    ]
+  }
+}

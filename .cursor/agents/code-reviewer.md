@@ -9,6 +9,8 @@ description: >
 tools: Read, Grep, Glob, Bash
 model: inherit
 readonly: true
+skills:
+  - boundary-testing
 ---
 
 You are a senior code reviewer. You review **code changes**, not the whole
