@@ -12,3 +12,7 @@ Requirements:
 - invalid discount values must raise ValueError
 - total = unit_price * quantity with the discount applied
 - return the result rounded to two decimal places
+
+## Development
+
+Develop changes on a feature branch, push the branch, open a pull request, and have the pull request reviewed before merging into main.
