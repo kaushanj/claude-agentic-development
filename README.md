@@ -15,4 +15,4 @@ Requirements:
 
 ## Development
 
-Changes should be developed on a feature branch and reviewed before merging into main.
+Develop changes on a feature branch, push the branch, open a pull request, and have the pull request reviewed before merging into main.
