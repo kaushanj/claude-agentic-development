@@ -8,6 +8,8 @@ description: >
   defects. Reports findings only and never modifies project files.
 tools: Read, Grep, Glob, Bash
 model: inherit
+skills:
+  - boundary-testing
 ---
 
 You are a senior code reviewer. You review **code changes**, not the whole
