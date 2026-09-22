@@ -129,6 +129,27 @@ class PricingTests(unittest.TestCase):
     def test_integer_one_unit_price(self):
         self.assertEqual(calculate_total(1, 2, 10), 1.80)
 
+    def test_zero_float_unit_price(self):
+        self.assertEqual(calculate_total(0.0, 2, 10), 0.00)
+
+    def test_positive_float_unit_price(self):
+        self.assertEqual(calculate_total(10.5, 2, 10), 18.90)
+
+    def test_string_unit_price_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total("10", 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
+    def test_none_unit_price_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total(None, 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
+    def test_list_unit_price_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            calculate_total([10], 2, 10)
+        self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
+
     def test_negative_discount_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(10, 2, -1)
