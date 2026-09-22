@@ -32,7 +32,7 @@ class PricingTests(unittest.TestCase):
         self.assertEqual(calculate_total(10, 74, 10), 666.00)
 
     def test_quantity_seventy_five(self):
-        self.assertEqual(calculate_total(10, 75, 10), 674.00)
+        self.assertEqual(calculate_total(10, 75, 10), 675.00)
 
     def test_quantity_seventy_six_raises(self):
         with self.assertRaises(ValueError) as ctx:
