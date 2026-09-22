@@ -197,6 +197,9 @@ class PricingTests(unittest.TestCase):
     def test_zero_discount(self):
         self.assertEqual(calculate_total(10, 2, 0), 20.00)
 
+    def test_integer_one_discount(self):
+        self.assertEqual(calculate_total(10, 2, 1), 19.80)
+
     def test_full_discount(self):
         self.assertEqual(calculate_total(10, 2, 100), 0.00)
 
