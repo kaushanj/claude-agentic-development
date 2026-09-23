@@ -31,13 +31,23 @@ For a new requirement:
 
 2. Give the planner's approved plan and original requirement to developer.
 
-3. After developer finishes, invoke code-reviewer and tester independently.
+3. After developer finishes, get the developer's:
+   - STATE_ID
+   - exact files changed for the current task
+
+   Invoke code-reviewer and tester independently with:
+   - original requirement
+   - exact current-task file list
+   - expected STATE_ID
+
    Run them concurrently when possible because neither depends on the other.
 
 4. Invoke quality-gate with:
    - original requirement
    - planner result
    - developer result
+   - expected STATE_ID
+   - exact current-task file list
    - reviewer result
    - tester result
    - known unrelated repository files, if any
@@ -99,13 +109,26 @@ For this lab, allow at most ONE automatic developer fix cycle.
 
 After developer makes a fix:
 
-1. Run code-reviewer again on the new state.
-2. Run tester again on the new state.
-3. Run quality-gate again using the NEW reviewer and tester evidence.
+1. Get the developer's NEW:
+   - STATE_ID
+   - exact current-task file list
+
+2. Run code-reviewer and tester again with:
+   - original requirement
+   - exact current-task file list
+   - expected NEW STATE_ID
+
+3. Run quality-gate again using:
+   - developer result
+   - NEW STATE_ID
+   - exact current-task file list
+   - NEW reviewer result
+   - NEW tester result
 
 Never reuse stale reviewer or tester evidence after code changes.
 
-If the second quality-gate returns READY, stop successfully.
+If the second quality-gate returns READY, follow the READY routing above:
+invoke commit-workflow, then pr-workflow, and stop after PR creation.
 
 If the second quality-gate returns BLOCKED, stop and report the blocker.
 Do not start another automatic fix cycle.

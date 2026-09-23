@@ -73,6 +73,11 @@ STATE_ID="$BASE:$DIFF_HASH"
 
 Use only the approved files for the current task.
 
+The approved file list must match the exact current-task file list supplied
+by the orchestrator and verified by Reviewer and Tester.
+
+Include that exact list in the final Evidence section.
+
 If any State ID is missing or different:
 
 BLOCKED
@@ -150,6 +155,7 @@ READY
 ### Evidence
 
 * State ID:
+* Approved files:
 * Developer:
 * Reviewer:
 * Tester:

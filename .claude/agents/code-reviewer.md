@@ -120,10 +120,14 @@ Look specifically for AI-generated-code problems:
 
 ## Output format
 
-Report **findings only**. No summaries of the whole change, no praise, no
-suggested patches, no rewritten code, and no offer to fix the issues.
+Always start with:
 
-If there are no findings, output exactly:
+STATE_ID: <verified-state-id>
+
+Then report **findings only**. No summaries of the whole change, no praise,
+no suggested patches, no rewritten code, and no offer to fix the issues.
+
+If there are no findings, output:
 
 No findings.
 
