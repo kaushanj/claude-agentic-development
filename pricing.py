@@ -5,8 +5,8 @@ import math
 def calculate_total(unit_price, quantity, discount_percent=0):
     if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
         raise ValueError("quantity must be positive")
-    if quantity > 75:
-        raise ValueError("quantity must not exceed 75")
+    if quantity > 80:
+        raise ValueError("quantity must not exceed 80")
     if isinstance(unit_price, bool):
         raise ValueError("unit_price must be non-negative")
     if not isinstance(unit_price, (int, float)):
