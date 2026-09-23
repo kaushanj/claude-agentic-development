@@ -150,6 +150,24 @@ class PricingTests(unittest.TestCase):
             calculate_total([10], 2, 10)
         self.assertEqual(str(ctx.exception), "unit_price must be non-negative")
 
+    def test_nan_unit_price_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(float("nan"), 2, 10)
+
+    def test_positive_infinity_unit_price_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(float("inf"), 2, 10)
+
+    def test_negative_infinity_unit_price_raises(self):
+        with self.assertRaises(ValueError):
+            calculate_total(float("-inf"), 2, 10)
+
+    def test_large_finite_float_unit_price(self):
+        self.assertEqual(calculate_total(1e12, 1, 0), 1000000000000.00)
+
+    def test_large_integer_unit_price(self):
+        self.assertEqual(calculate_total(1_000_000, 2, 10), 1_800_000.00)
+
     def test_negative_discount_raises(self):
         with self.assertRaises(ValueError):
             calculate_total(10, 2, -1)
