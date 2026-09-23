@@ -203,6 +203,15 @@ class PricingTests(unittest.TestCase):
     def test_full_discount(self):
         self.assertEqual(calculate_total(10, 2, 100), 0.00)
 
+    def test_round_half_up_midpoint(self):
+        self.assertEqual(calculate_total(2.675, 1, 0), 2.68)
+
+    def test_round_half_up_below_midpoint(self):
+        self.assertEqual(calculate_total(2.674, 1, 0), 2.67)
+
+    def test_round_half_up_even_hundredths_midpoint(self):
+        self.assertEqual(calculate_total(1.225, 1, 0), 1.23)
+
 
 if __name__ == "__main__":
     unittest.main()
