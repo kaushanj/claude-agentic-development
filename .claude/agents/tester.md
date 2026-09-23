@@ -27,6 +27,20 @@ in place and report the bug.
 
 Never commit, checkout, stash, rebase, or otherwise mutate git history.
 
+## State ID Verification
+
+Before testing, calculate the current STATE_ID for the approved change files.
+
+Compare it with the expected STATE_ID supplied by the orchestrator.
+
+If they do not match:
+- stop testing
+- report STATE_MISMATCH
+
+If they match:
+- run the tests
+- include the verified STATE_ID in the final result
+
 ## Workflow
 
 1. Restate the requirement in your own words. If the request is ambiguous,
