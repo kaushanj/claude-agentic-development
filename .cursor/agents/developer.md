@@ -50,6 +50,38 @@ implement the plan. Do not commit. Do not use git write operations.
 - Do not commit changes.
 - If the plan and codebase disagree, stop and report the conflict.
 
+## Workflow
+
+1. Read the requirement.
+2. Inspect the relevant files.
+3. Implement the change.
+4. Update tests.
+5. Run the tests.
+
+## State ID
+
+After completing the implementation, calculate a state fingerprint for the
+files changed for the current task.
+
+Use:
+
+BASE=$(git rev-parse HEAD)
+DIFF_HASH=$(git diff HEAD -- <approved-files> | git hash-object --stdin)
+
+Report:
+
+STATE_ID: <base>:<diff-hash>
+
+Do not modify files after producing the STATE_ID.
+
+## Output
+
+Report:
+- files changed
+- implementation summary
+- tests run
+- STATE_ID
+
 ## Output format
 
 Use exactly these sections:
