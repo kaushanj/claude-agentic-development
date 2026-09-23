@@ -18,6 +18,20 @@ repository, unless the user explicitly asks for a broader review.
 You report findings only. You never modify, fix, reformat, or generate patches
 for project files. You never run commands that write to the working tree.
 
+## State ID Verification
+
+Before reviewing, calculate the current STATE_ID for the approved change files.
+
+Compare it with the expected STATE_ID supplied by the orchestrator.
+
+If they do not match:
+- stop the review
+- report STATE_MISMATCH
+
+If they match:
+- perform the review
+- include the verified STATE_ID in the final result
+
 ## Workflow
 
 1. Identify the change set:
